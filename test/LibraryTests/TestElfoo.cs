@@ -19,21 +19,21 @@ namespace roleplay
         [Test]
         public void TestInicializacionElfo()
         {
-            Assert.AreEqual("Link", elfo.Nombre);
-            Assert.AreEqual(200, elfo.Vida);
-            Assert.AreEqual(20, elfo.Ataque);
-            Assert.AreEqual(100, elfo.Mana);
+            Assert.That( elfo.Nombre,Is.EqualTo("Link"));
+            Assert.That( elfo.Vida,Is.EqualTo(200));
+            Assert.That( elfo.Ataque,Is.EqualTo(20));
+            Assert.That( elfo.Mana,Is.EqualTo(100));
         }
 
         [Test]
         public void TestCargarMana()
         {
             var resultado = elfo.RecargaMana(50);
-            Assert.AreEqual("Aumentaste el mana en 50 puntos", resultado);
-            Assert.AreEqual(150, elfo.Mana);
+            Assert.That(resultado, Is.EqualTo("Aumentaste el mana en 50 puntos"));
+            Assert.That(elfo.Mana, Is.EqualTo(150));
 
             resultado = elfo.RecargaMana(200);
-            Assert.AreEqual("El maná está al maximo", resultado);
+            Assert.That(resultado, Is.EqualTo("El maná está al maximo"));
         }
 
         [Test]
@@ -41,7 +41,7 @@ namespace roleplay
         {
             elfo.AgregarItem(masterSword);
             elfo.AgregarItem(escudoHyliano);
-            Assert.AreEqual(2, elfo.Item.Count);
+            Assert.That(elfo.Item.Count, Is.EqualTo(2));
         }
 
         [Test]
@@ -49,25 +49,25 @@ namespace roleplay
         {
             elfo.Vida = 180;
             elfo.Curacion(15);
-            Assert.AreEqual(195, elfo.Vida);
+            Assert.That(elfo.Vida, Is.EqualTo(195));
 
             elfo.Curacion(25);
-            Assert.AreEqual(195, elfo.Vida); 
+            Assert.That(elfo.Vida, Is.EqualTo(195));
         }
 
         [Test]
         public void TestAtacarConItem()
         {
             elfo.AgregarItem(masterSword);
-            int valorAtaque = elfo.Atacar(item: masterSword);
-            Assert.AreEqual(60, valorAtaque); // 20 + 40 (Master Sword)
+            int valorAtaque = elfo.AtacarConItems(item: masterSword);
+            Assert.That(valorAtaque, Is.EqualTo(60)); // 20 + 40 (Master Sword)
         }
 
         [Test]
         public void TestRecibirAtaqueSinDefensa()
         {
             elfo.Defender(40, "Bokoblin");
-            Assert.AreEqual(160, elfo.Vida); 
+            Assert.That(elfo.Vida, Is.EqualTo(160));
         }
 
         [Test]
@@ -75,7 +75,7 @@ namespace roleplay
         {
             elfo.AgregarItem(escudoHyliano);
             elfo.Defender(60, "Bokoblin");
-            Assert.AreEqual(190, elfo.Vida); // 60 daño, 60 defensa del Escudo Hyliano
+            Assert.That(elfo.Vida, Is.EqualTo(190)); // 60 daño, 60 defensa del Escudo Hyliano
         }
     }
 }
