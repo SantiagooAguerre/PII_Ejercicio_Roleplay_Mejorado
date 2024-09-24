@@ -75,7 +75,7 @@ namespace roleplay
         {
             elfo.AgregarItem(escudoHyliano);
             elfo.Defender(60, "Bokoblin");
-            Assert.That(elfo.Vida, Is.EqualTo(190)); // 60 daño, 60 defensa del Escudo Hyliano
+            Assert.That(elfo.Vida, Is.EqualTo(200)); // 60 daño, 60 defensa del Escudo Hyliano
         }
     }
 }

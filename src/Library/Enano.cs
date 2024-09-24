@@ -34,10 +34,10 @@ namespace roleplay
 
         public void Defender(int ataque, string rival)
         {
-            int vida = Vida;
+            
             foreach (Item item in Item)
             {
-                vida += item.Defensa;
+                Vida += item.Defensa;
             }
 
             Vida -= ataque;
