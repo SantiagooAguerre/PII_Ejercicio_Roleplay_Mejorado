@@ -19,7 +19,7 @@ namespace roleplay
         [Test]
         public void TestInicializacionElfo()
         {
-            Assert.AreEqual("Link", elfo.Nombre);
+            Assert.That(elfo.Nombre, Is.EqualTo("Link"));
             Assert.AreEqual(200, elfo.Vida);
             Assert.AreEqual(20, elfo.Ataque);
             Assert.AreEqual(100, elfo.Mana);
