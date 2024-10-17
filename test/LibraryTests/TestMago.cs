@@ -21,10 +21,10 @@ namespace roleplay
         [Test]
         public void TestInicializacionMago()
         {
-            Assert.AreEqual("Zelda", mago.Nombre);
-            Assert.AreEqual(150, mago.Vida);
-            Assert.AreEqual(100, mago.Mana);
-            Assert.AreEqual(20, mago.Ataque);
+            Assert.That(mago.Nombre, Is.EqualTo("Zelda"));
+            Assert.That(mago.Vida, Is.EqualTo(100));
+            Assert.That(mago.Mana, Is.EqualTo(150));
+            Assert.That(mago.Ataque, Is.EqualTo(30));
         }
 
         [Test]
@@ -32,7 +32,7 @@ namespace roleplay
         {
             mago.AgregarHabilidad(ziodyne);
             mago.AgregarHabilidad(agi);
-            Assert.AreEqual(2, mago.Habilidades.Count);
+            Assert.That(mago.Habilidades.Count, Is.EqualTo(2));
         }
 
         [Test]
@@ -40,7 +40,8 @@ namespace roleplay
         {
             mago.AgregarHabilidad(agi);
             int valorAtaque = mago.AtacarConHabilidades(habilidades: agi);
-            Assert.AreEqual(50, valorAtaque); // 20 (base) + 30 (Agi)
+            Assert.That(valorAtaque, Is.EqualTo(60)); // 30 (base) + 30 (Agi)
+
         }
 
         [Test]
@@ -48,18 +49,27 @@ namespace roleplay
         {
             mago.AgregarItem(tunicaZora);
             mago.Defender(50, "Rey Bulblin");
-            Assert.AreEqual(120, mago.Vida); // 150 - 50 + 20 (defensa túnica)
+            Assert.That(mago.Vida, Is.EqualTo(70)); // 100 - 50 + 20 (defensa túnica)
         }
 
         [Test]
         public void TestRecargaMana()
         {
-            var resultado = mago.RecargaMana(50);
-            Assert.AreEqual("Aumentaste el mana en 50 puntos", resultado);
-            Assert.AreEqual(150, mago.Mana);
-
+            
+            mago.AtacarConHabilidades(ziodyne); //mana - 16 = 134
+            mago.AtacarConHabilidades(ziodyne); //mana - 16 = 118
+            mago.AtacarConHabilidades(ziodyne); //mana - 16 = 102
+            mago.AtacarConHabilidades(ziodyne); //mana - 16 = 86
+            var resultado = mago.RecargaMana(50); //mana + 50 = 136
+            Assert.That(resultado, Is.EqualTo("Aumentaste el mana en 50 puntos"));
+            Assert.That(mago.Mana, Is.EqualTo(136)); 
+            
+            mago.AtacarConHabilidades(ziodyne); // mana - 16 = 120
+            mago.AtacarConHabilidades(ziodyne); // mana - 16 = 104
             resultado = mago.RecargaMana(200);
-            Assert.AreEqual("El maná está al maximo", resultado);
+            Assert.That(resultado, Is.EqualTo("El maná está al maximo"));
+            Assert.That(mago.Mana,Is.EqualTo(mago.ManaInicial));
+
         }
     }
 }

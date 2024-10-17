@@ -19,9 +19,9 @@ namespace roleplay
         [Test]
         public void TestInicializacionEnano()
         {
-            Assert.AreEqual("Darunia", enano.Nombre);
-            Assert.AreEqual(250, enano.Vida);
-            Assert.AreEqual(50, enano.Ataque);
+            Assert.That(enano.Nombre, Is.EqualTo("Darunia"));
+            Assert.That(enano.Vida, Is.EqualTo(250));
+            Assert.That(enano.Ataque, Is.EqualTo(50));
         }
 
         [Test]
@@ -29,15 +29,15 @@ namespace roleplay
         {
             enano.AgregarItem(botasDeHierro);
             enano.AgregarItem(tunicaZora);
-            Assert.AreEqual(2, enano.Item.Count);
+            Assert.That(enano.Item.Count, Is.EqualTo(2));
         }
 
         [Test]
         public void TestAtacarConItems()
         {
             enano.AgregarItem(botasDeHierro);
-            int valorAtaque = enano.Atacar();
-            Assert.AreEqual(50, valorAtaque); // Ataque base sin incremento
+            int valorAtaque = enano.AtacarConItems(botasDeHierro);
+            Assert.That(valorAtaque, Is.EqualTo(50)); // Ataque base sin incremento
         }
 
         [Test]
@@ -46,7 +46,7 @@ namespace roleplay
             enano.AgregarItem(botasDeHierro);
             enano.AgregarItem(tunicaZora);
             enano.Defender(100, "Molduga");
-            Assert.AreEqual(200, enano.Vida); // 250 - 100 + (30+20) defensa
+            Assert.That(enano.Vida, Is.EqualTo(200)); // 250 - 100 + (30+20) defensa
         }
     }
 }
