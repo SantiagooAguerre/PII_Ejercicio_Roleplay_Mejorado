@@ -8,11 +8,11 @@
             IPersonaje enano = new Enano("Darunia");
             IPersonaje mago = new Mago("Zelda");
             
-            Item espada = Item.MasterSword;
-            Item espadagrande = Item.EspadaBiggoron;
-            Item escudo = Item.EscudoHyliano;
-            Item botas = Item.BotasDeHierro;
-            Item tunica = Item.TunicaZora;
+            ItemAtaque espada = ItemAtaque.MasterSword;
+            ItemAtaque espadagrande = ItemAtaque.EspadaBiggoron;
+            ItemAtaque escudo = ItemAtaque.EscudoHyliano;
+            ItemAtaque botas = ItemAtaque.BotasDeHierro;
+            ItemAtaque tunica = ItemAtaque.TunicaZora;
 
             elfo.AgregarItem(espada);
             elfo.AgregarItem(escudo);

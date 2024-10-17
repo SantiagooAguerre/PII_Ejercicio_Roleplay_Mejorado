@@ -5,15 +5,15 @@ namespace roleplay
     public class TestEnano
     {
         private Enano enano;
-        private Item botasDeHierro;
-        private Item tunicaZora;
+        private ItemAtaque botasDeHierro;
+        private ItemAtaque tunicaZora;
 
         [SetUp]
         public void Setup()
         {
             enano = new Enano("Darunia");
-            botasDeHierro = Item.BotasDeHierro;
-            tunicaZora = Item.TunicaZora;
+            botasDeHierro = ItemAtaque.BotasDeHierro;
+            tunicaZora = ItemAtaque.TunicaZora;
         }
 
         [Test]

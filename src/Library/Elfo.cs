@@ -10,8 +10,9 @@ namespace roleplay
         public int Mana { get; set; }
         public int VidaBase;
         public int ManaInicial;
-        public ArrayList Habilidades { get; set; } = new ArrayList();
-        public ArrayList Item { get; set; } = new ArrayList();
+        public List<Habilidades> Habilidades { get; set; } = new List<Habilidades>();
+        public List<IItemAtaque> ItemAtaque { get; set; } = new List<IItemAtaque>();
+        public List<IItemDefensa> ItemDefensa { get; set; } = new List<IItemDefensa>();
 
         public Elfo(string nombre)
         {
@@ -28,9 +29,14 @@ namespace roleplay
             Habilidades.Add(habilidades);
         }
 
-        public void AgregarItem(Item item)
+        public void AgregarItemAtaque(IItemAtaque itemAtaque)
         {
-            Item.Add(item);
+            ItemAtaque.Add(itemAtaque);
+        }
+        
+        public void AgregarItemDefensa(IItemDefensa itemDefensa)
+        {
+            ItemDefensa.Add(itemDefensa);
         }
 
         public int AtacarConHabilidades(Habilidades habilidades = null)
@@ -52,12 +58,12 @@ namespace roleplay
             return valor;
         }
         
-        public int AtacarConItems(Item item)
+        public int AtacarConItems(IItemAtaque itemAtaque)
         {
             int valor = Ataque;
-            if (Item.Contains(item))
+            if (ItemAtaque.Contains(itemAtaque))
             {
-                valor += item.Ataque;
+                valor += itemAtaque.Ataque;
             } 
             return valor;
         }
@@ -65,13 +71,13 @@ namespace roleplay
         public void Defender(int ataque, string rival)
         {
             
-            foreach (Item item in Item)
+            foreach (IItemDefensa item in ItemDefensa)
             {
                 Vida += item.Defensa;
             }
 
             Vida -= ataque;
-            Console.WriteLine($"{Nombre} fue atacado por {rival}, su vida disminuyyó hasta {Vida}");
+            Console.WriteLine($"{Nombre} fue atacado por {rival}, su vida disminuyó hasta {Vida}");
         }
 
         public string RecargaMana(int mana)

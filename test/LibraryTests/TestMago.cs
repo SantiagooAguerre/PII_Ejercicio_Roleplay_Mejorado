@@ -5,7 +5,7 @@ namespace roleplay
     public class TestMago
     {
         private Mago mago;
-        private Item tunicaZora;
+        private ItemAtaque tunicaZora;
         private Habilidades ziodyne;
         private Habilidades agi;
 
@@ -13,7 +13,7 @@ namespace roleplay
         public void Setup()
         {
             mago = new Mago("Zelda");
-            tunicaZora = Item.TunicaZora;
+            tunicaZora = ItemAtaque.TunicaZora;
             ziodyne = Habilidades.Ziodyne;
             agi = Habilidades.Agi;
         }
