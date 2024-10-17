@@ -11,6 +11,7 @@ namespace roleplay
         public int ManaInicial;
         public List<Habilidades> Habilidades { get; set; } = new List<Habilidades>();
         public List<IItemAtaque> ItemAtaque { get; set; } = new List<IItemAtaque>();
+        public List<IItemMagico> ItemMagico { get; set; } = new List<IItemMagico>();
         public List<IItemDefensa> ItemDefensa { get; set; } = new List<IItemDefensa>();
 
         public Mago(string nombre)
@@ -37,6 +38,10 @@ namespace roleplay
             ItemDefensa.Add(itemDefensa);
         }
         
+        public void AgregarItemMagico(IItemMagico itemMagico)
+        {
+            ItemMagico.Add(itemMagico);
+        }
 
         public int AtacarConHabilidades(Habilidades habilidades = null)
         {

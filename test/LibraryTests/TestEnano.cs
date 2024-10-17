@@ -1,52 +1,51 @@
 using NUnit.Framework;
 
-namespace roleplay
+namespace roleplay;
+
+public class TestEnano
 {
-    public class TestEnano
+    private Enano enano;
+    private ItemAtaque botasDeHierro;
+    private ItemAtaque tunicaZora;
+
+    [SetUp]
+    public void Setup()
     {
-        private Enano enano;
-        private ItemAtaque botasDeHierro;
-        private ItemAtaque tunicaZora;
+        enano = new Enano("Darunia");
+        botasDeHierro = ItemAtaque.BotasDeHierro;
+        tunicaZora = ItemAtaque.TunicaZora;
+    }
 
-        [SetUp]
-        public void Setup()
-        {
-            enano = new Enano("Darunia");
-            botasDeHierro = ItemAtaque.BotasDeHierro;
-            tunicaZora = ItemAtaque.TunicaZora;
-        }
+    [Test]
+    public void TestInicializacionEnano()
+    {
+        Assert.That(enano.Nombre, Is.EqualTo("Darunia"));
+        Assert.That(enano.Vida, Is.EqualTo(250));
+        Assert.That(enano.Ataque, Is.EqualTo(50));
+    }
 
-        [Test]
-        public void TestInicializacionEnano()
-        {
-            Assert.That(enano.Nombre, Is.EqualTo("Darunia"));
-            Assert.That(enano.Vida, Is.EqualTo(250));
-            Assert.That(enano.Ataque, Is.EqualTo(50));
-        }
+    [Test]
+    public void TestAgregarItem()
+    {
+        enano.AgregarItem(botasDeHierro);
+        enano.AgregarItem(tunicaZora);
+        Assert.That(enano.Item.Count, Is.EqualTo(2));
+    }
 
-        [Test]
-        public void TestAgregarItem()
-        {
-            enano.AgregarItem(botasDeHierro);
-            enano.AgregarItem(tunicaZora);
-            Assert.That(enano.Item.Count, Is.EqualTo(2));
-        }
+    [Test]
+    public void TestAtacarConItems()
+    {
+        enano.AgregarItem(botasDeHierro);
+        int valorAtaque = enano.AtacarConItems(botasDeHierro);
+        Assert.That(valorAtaque, Is.EqualTo(50)); // Ataque base sin incremento
+    }
 
-        [Test]
-        public void TestAtacarConItems()
-        {
-            enano.AgregarItem(botasDeHierro);
-            int valorAtaque = enano.AtacarConItems(botasDeHierro);
-            Assert.That(valorAtaque, Is.EqualTo(50)); // Ataque base sin incremento
-        }
-
-        [Test]
-        public void TestDefender()
-        {
-            enano.AgregarItem(botasDeHierro);
-            enano.AgregarItem(tunicaZora);
-            enano.Defender(100, "Molduga");
-            Assert.That(enano.Vida, Is.EqualTo(200)); // 250 - 100 + (30+20) defensa
-        }
+    [Test]
+    public void TestDefender()
+    {
+        enano.AgregarItem(botasDeHierro);
+        enano.AgregarItem(tunicaZora);
+        enano.Defender(100, "Molduga");
+        Assert.That(enano.Vida, Is.EqualTo(200)); // 250 - 100 + (30+20) defensa
     }
 }

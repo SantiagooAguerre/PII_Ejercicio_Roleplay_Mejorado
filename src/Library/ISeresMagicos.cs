@@ -8,4 +8,5 @@ public interface ISeresMagicos
     public void AgregarHabilidad(Habilidades habilidades);
     public int AtacarConHabilidades(Habilidades habilidades = null);
     public string RecargaMana(int mana);
+    public void AgregarItemMagico(IItemMagico itemMagico);
 }
