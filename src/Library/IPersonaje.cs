@@ -1,11 +1,14 @@
 namespace roleplay;
-using System.Collections;
 
 public interface IPersonaje
 {
-    public string Nombre { get; set; }
-    public int Vida { get; set; }
-    public int Ataque { get; set; }
+    string Nombre { get; set; }
+    static int Vida;
+    static int Vidabase;
+    static int Ataque;
+    static int VP;
+    public int VidaBase();
+    public int VidaActual();
     public List<IItemAtaque> ItemAtaque { get; set; }
     public List<IItemDefensa> ItemDefensa { get; set; }
     public void Defender(int ataque, string rival);

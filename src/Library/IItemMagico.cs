@@ -2,5 +2,7 @@ namespace roleplay;
 
 public interface IItemMagico
 {
-    public int Ataque { get; set; }
+    string Nombre { get; set; }
+    int Ataque { get; set; }
+    public void BoostHabilidades(ISeresMagicos heroe);
 }

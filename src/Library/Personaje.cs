@@ -7,8 +7,20 @@ public class Personaje : IPersonaje
     public string Nombre { get; set; }
     public int Vida { get; set; }
     public int Ataque { get; set; }
+    public int Vidabase { get; set; }
+    public int VP { get; set; }
     public List<IItemAtaque> ItemAtaque { get; set; } = new List<IItemAtaque>();
     public List<IItemDefensa> ItemDefensa { get; set; } = new List<IItemDefensa>();
+
+    public int VidaBase()
+    {
+        return Vidabase;
+    }
+
+    public int VidaActual()
+    {
+        return Vida;
+    }
 
     public void AgregarItemAtaque(IItemAtaque itemAtaque)
     {
@@ -39,6 +51,6 @@ public class Personaje : IPersonaje
         }
 
         Vida -= ataque;
-        Console.WriteLine($"{Nombre} fue atacado por {rival}, su vida disminuyyó hasta {Vida}");
+        Console.WriteLine($"{Nombre} fue atacado por {rival}, su vida disminuyó hasta {Vida}");
     }
 }

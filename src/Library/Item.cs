@@ -6,6 +6,13 @@ public class Item : IItemAtaque, IItemDefensa, IItemMagico
     public int Defensa { get; set; }
     public int Ataque { get; set; }
     
+    public void BoostHabilidades(ISeresMagicos heroe)
+    {
+        heroe.BoostHabilidades(Ataque);
+        Console.WriteLine($"Las habilidades de {heroe.Nombre} han aumentado {Ataque} de ataque");
+        
+    }
+    
     public static IItemAtaque MasterSword { get; } = new Item { Nombre = "Master Sword", Ataque = 40 };
     public static IItemDefensa EscudoHyliano { get; } = new Item { Nombre = "Escudo Hyliano", Defensa = 60 };
     public static IItemAtaque EspadaBiggoron { get; } = new Item { Nombre = "Espada Biggoron", Ataque = 50 };

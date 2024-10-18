@@ -5,7 +5,18 @@ namespace roleplay
     {
         public string Nombre { get; set; }
         public int Ataque { get; set; }
+        public int Defensa { get; set; }
         public int Costo { get; set; }
+        
+        public int ConseguirAtaque()
+        {
+            return Ataque;
+        }
+
+        public int ConseguirDefensa()
+        {
+            return Defensa;
+        }
 
         public static Habilidades Agi { get; } = new Habilidades { Nombre = "Agi", Ataque = 30, Costo = 4 };
         public static Habilidades Agilao { get; } = new Habilidades { Nombre = "Agilao", Ataque = 50, Costo = 8 };

@@ -2,5 +2,5 @@ namespace roleplay;
 
 public interface ISanador : ISeresMagicos
 {
-    public void Curacion(int curar);
+    public void Curacion(int curar, IPersonaje personajequecurar);
 }

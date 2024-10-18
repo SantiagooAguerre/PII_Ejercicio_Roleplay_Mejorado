@@ -1,21 +1,28 @@
-using System.Collections;
-
 namespace roleplay;
 
-public class Elfo : Personaje, ISanador
+public class Elfo : Heroes, ISanador
 {
     public int Mana { get; set; }
-    public int VidaBase;
     public int ManaInicial;
-    public List<Habilidades> Habilidades { get; set; } = new List<Habilidades>();
-    public List<IItemMagico> ItemMagico { get; set; }
+    private List<Habilidades> Habilidades = new List<Habilidades>();
+    private List<IItemMagico> ItemMagico = new List<IItemMagico>();
+    
+    public int CantidadHabilidades
+    {
+        get { return Habilidades.Count; }
+    }
+
+    public List<Habilidades> Hechizos
+    {
+        get { return Habilidades; }
+    }
 
     public Elfo(string nombre)
     {
         Nombre = nombre;
         Vida = 200;
         Ataque = 20;
-        VidaBase = 200;
+        Vidabase = 200;
         Mana = 100;
         ManaInicial = 100;
     }
@@ -28,6 +35,14 @@ public class Elfo : Personaje, ISanador
     public void AgregarItemMagico(IItemMagico itemMagico)
     {
         ItemMagico.Add(itemMagico);
+    }
+
+    public void MostrarHabilidades()
+    {
+        for (int i = 0; i < Habilidades.Count; i++)
+        {
+            Console.WriteLine($"{i+1} - {Habilidades[i].Nombre} / {Habilidades[i].Ataque}");
+        }
     }
 
     public int AtacarConHabilidades(Habilidades habilidades = null)
@@ -50,6 +65,14 @@ public class Elfo : Personaje, ISanador
         return valor;
     }
 
+    public void BoostHabilidades(int ataque)
+    {
+        foreach (var habilidad in Habilidades)
+        {
+            habilidad.Ataque += ataque;
+        }
+    }
+
     public string RecargaMana(int mana)
     {
         if (mana > ManaInicial)
@@ -62,10 +85,33 @@ public class Elfo : Personaje, ISanador
             return ($"Aumentaste el mana en {mana} puntos");
         }
     }
-
-    public void Curacion(int curar)
+    
+    public int ValorAtaqueHechizos(Habilidades habilidad = null)
     {
-        if ((Vida + curar) > VidaBase || curar > 20)
+        int valor = Ataque;
+        foreach (var itemagico in ItemMagico)
+        {
+            itemagico.BoostHabilidades(this);
+        }
+        if (habilidad != null)
+        {
+            if (Mana >= habilidad.Costo)
+            {
+                Mana -= habilidad.Costo;
+                valor += habilidad.Ataque;
+            }
+            else
+            {
+                Console.WriteLine($"No se puede cargar la habilidad {Nombre} de {habilidad.Nombre} por falta de maná");
+            }
+        }
+                
+        return valor;
+    }
+
+    public void Curacion(int curar, IPersonaje personajequecurar)
+    {
+        if (personajequecurar.VidaActual() + curar > personajequecurar.VidaBase() || curar > 20)
         {
             Console.WriteLine(
                 $"{Nombre} no ha podido curarse");

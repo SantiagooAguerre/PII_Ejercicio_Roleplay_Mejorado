@@ -1,6 +1,6 @@
 namespace roleplay;
 
-public class Mago : Personaje, IUniversitario
+public class Mago : Heroes, IUniversitario
 {
     public int Mana { get; set; }
     public int ManaInicial;
@@ -45,9 +45,24 @@ public class Mago : Personaje, IUniversitario
         return valor;
     }
 
-    public void Estudio(int boost)
+    public void Estudio(int estudio)
     {
-        ManaInicial += boost;
+        if (estudio > ManaInicial)
+        {
+            Console.WriteLine("El estudio supera tu maná, imposible su solicitud");
+        }
+        else
+        {
+            Mana += estudio;
+            Console.WriteLine($"Se estudio {estudio}");
+        }
+    }
+    
+    public void BoostHabilidades(int ataque){
+        foreach (var habilidad in Habilidades)
+        {
+            habilidad.Ataque += ataque;
+        }
     }
 
     public string RecargaMana(int mana)
