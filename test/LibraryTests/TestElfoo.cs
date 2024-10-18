@@ -5,15 +5,13 @@ namespace roleplay;
 public class TestElfo
 {
     private Elfo elfo;
-    private ItemAtaque masterSword;
-    private ItemAtaque escudoHyliano;
+    private IItemMagico infilitracion;
 
     [SetUp]
     public void Setup()
     {
         elfo = new Elfo("Link");
-        masterSword = ItemAtaque.MasterSword;
-        escudoHyliano = ItemAtaque.EscudoHyliano;
+        infilitracion = Item.Infilitracion;
     }
 
     [Test]
@@ -37,11 +35,10 @@ public class TestElfo
     }
 
     [Test]
-    public void TestAgregarItem()
+    public void TestAgregarItemMagico()
     {
-        elfo.AgregarItem(masterSword);
-        elfo.AgregarItem(escudoHyliano);
-        Assert.That(elfo.Item.Count, Is.EqualTo(2));
+        elfo.AgregarItemMagico(infilitracion);
+        Assert.That(elfo.ItemMagico.Count, Is.EqualTo(1));
     }
 
     [Test]
@@ -56,25 +53,26 @@ public class TestElfo
     }
 
     [Test]
-    public void TestAtacarConItem()
+    public void TestAtacarConHabilidades()
     {
-        elfo.AgregarItem(masterSword);
-        int valorAtaque = elfo.AtacarConItems(itemAtaque: masterSword);
-        Assert.That(valorAtaque, Is.EqualTo(60)); // 20 + 40 (Master Sword)
+        int valorAtaque = elfo.AtacarConHabilidades(Habilidades.Agi);
+        Assert.That(valorAtaque, Is.EqualTo(60));
+        Assert.That(elfo.Mana, Is.EqualTo(70));
     }
 
     [Test]
-    public void TestRecibirAtaqueSinDefensa()
+    public void TestAtacarConHabilidadesSinMana()
+    {
+        elfo.Mana = 20;
+        int valorAtaque = elfo.AtacarConHabilidades(Habilidades.Agi);
+        Assert.That(valorAtaque, Is.EqualTo(20));
+        Assert.That(elfo.Mana, Is.EqualTo(20));
+    }
+
+    [Test]
+    public void TestRecibirAtaque()
     {
         elfo.Defender(40, "Bokoblin");
         Assert.That(elfo.Vida, Is.EqualTo(160));
-    }
-
-    [Test]
-    public void TestRecibirAtaqueConDefensa()
-    {
-        elfo.AgregarItem(escudoHyliano);
-        elfo.Defender(60, "Bokoblin");
-        Assert.That(elfo.Vida, Is.EqualTo(200)); // 60 daño, 60 defensa del Escudo Hyliano
     }
 }

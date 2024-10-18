@@ -1,7 +1,6 @@
 namespace roleplay;
-using System.Collections;
 
-public interface ISeresMagicos
+public interface ISeresMagicos : IPersonaje
 {
     public int Mana { get; set; }
     public List<Habilidades> Habilidades { get; set; }

@@ -1,6 +1,6 @@
 namespace roleplay;
 
-public interface IElfo
+public interface ISanador : ISeresMagicos
 {
     public void Curacion(int curar);
 }
