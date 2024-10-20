@@ -6,6 +6,22 @@ public class Item : IItemAtaque, IItemDefensa, IItemMagico
     public int Defensa { get; set; }
     public int Ataque { get; set; }
     
+    public int ObtenerAtaque()
+    {
+        return Ataque;
+    }
+    
+    public int ObtenerDefensa()
+    {
+        return Defensa;
+    }
+    
+    public void BoostHabilidadesEnemigos(ISeresMagicos villano)
+    {
+        villano.BoostHabilidades(Ataque);
+        Console.WriteLine($"Las habilidades de {villano.Nombre} han aumentado {Ataque} de ataque");
+    }
+    
     public void BoostHabilidades(ISeresMagicos heroe)
     {
         heroe.BoostHabilidades(Ataque);
