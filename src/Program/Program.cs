@@ -32,7 +32,6 @@ class Program
         List<IPersonajeBueno> heroesList = new List<IPersonajeBueno> { elfo };
         List<IPersonajeOscuro> enemigosList = new List<IPersonajeOscuro> { bokoblin, lizalfos, skullkid, ganondorf };
 
-        // Instanciar y ejecutar el encuentro
         EncuentroCombate encuentro = new EncuentroCombate(heroesList, enemigosList);
         encuentro.DoEncounter();
     }

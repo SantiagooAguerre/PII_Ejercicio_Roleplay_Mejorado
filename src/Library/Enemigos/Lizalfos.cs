@@ -8,6 +8,7 @@ public class Lizalfos : PersonajeOscuro
         Vida = 200;
         Vidabase = 200;
         Ataque = 20;
+        VP = 20;
     }
     
     public void RecibirAtaqueFisico(int ataque, string atacante)

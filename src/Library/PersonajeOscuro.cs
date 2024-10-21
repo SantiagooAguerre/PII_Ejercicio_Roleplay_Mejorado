@@ -61,12 +61,22 @@ public class PersonajeOscuro : IPersonajeOscuro
 
     public void Defender(int ataque, string rival)
     {
+        int defensaTotal = 0;
         foreach (IItemDefensa item in ItemDefensa)
         {
-            Vida += item.Defensa;
+            defensaTotal += item.Defensa;
         }
-
-        Vida -= ataque;
+        int dañoRecibido = ataque - defensaTotal;
+        if (dañoRecibido < 0)
+        {
+            dañoRecibido = 0;
+        }
+        Vida -= dañoRecibido;
+    
         Console.WriteLine($"{Nombre} fue atacado por {rival}, su vida disminuyó hasta {Vida}");
+        if (Vida <= 0)
+        {
+            Console.WriteLine($"{Nombre} ha muerto");
+        }
     }
 }

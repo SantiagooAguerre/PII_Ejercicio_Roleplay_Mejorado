@@ -8,6 +8,7 @@ public class Bokoblin : PersonajeOscuro
         Vida = 200;
         Vidabase = 200;
         Ataque = 20;
+        VP = 20;
         Vidabase = 200;
     }
 

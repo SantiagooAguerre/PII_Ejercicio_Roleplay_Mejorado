@@ -9,6 +9,7 @@ public class SkullKid : PersonajeOscuro
         Vida = 50;
         Vidabase = 50;
         Ataque = 20;
+        VP = 20;
     }
     
     public void RecibirAtaqueFisico(int ataque, string rival)
