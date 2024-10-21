@@ -5,13 +5,15 @@ namespace roleplay;
 public class TestElfo
 {
     private Elfo elfo;
-    private IItemMagico infilitracion;
+    private IItemMagico infiltracion;
+    private Habilidades habilidad;
 
     [SetUp]
     public void Setup()
     {
         elfo = new Elfo("Link");
-        infilitracion = Item.Infilitracion;
+        infiltracion = Item.Infilitracion;
+        habilidad = new Habilidades { Nombre = "Agi", Ataque = 40, Costo = 30 }; // Asumiendo que Habilidades tiene estas propiedades
     }
 
     [Test]
@@ -45,34 +47,53 @@ public class TestElfo
     public void TestCuracion()
     {
         elfo.Vida = 180;
-        elfo.Curacion(15);
+        elfo.Curacion(15, elfo); // Asegúrate de pasar un objeto que implemente IPersonajeBueno
         Assert.That(elfo.Vida, Is.EqualTo(195));
 
-        elfo.Curacion(25);
+        elfo.Curacion(25, elfo);
         Assert.That(elfo.Vida, Is.EqualTo(195));
     }
 
     [Test]
     public void TestAtacarConHabilidades()
     {
-        int valorAtaque = elfo.AtacarConHabilidades(Habilidades.Agi);
-        Assert.That(valorAtaque, Is.EqualTo(60));
-        Assert.That(elfo.Mana, Is.EqualTo(70));
+        elfo.AgregarHabilidad(habilidad);
+        int valorAtaque = elfo.AtacarConHabilidades(habilidad);
+        Assert.That(valorAtaque, Is.EqualTo(60)); // 20 (Ataque base) + 40 (Habilidad)
+        Assert.That(elfo.Mana, Is.EqualTo(70)); // Mana después de usar habilidad
     }
 
     [Test]
     public void TestAtacarConHabilidadesSinMana()
     {
         elfo.Mana = 20;
-        int valorAtaque = elfo.AtacarConHabilidades(Habilidades.Agi);
-        Assert.That(valorAtaque, Is.EqualTo(20));
-        Assert.That(elfo.Mana, Is.EqualTo(20));
+        elfo.AgregarHabilidad(habilidad);
+        int valorAtaque = elfo.AtacarConHabilidades(habilidad);
+        Assert.That(valorAtaque, Is.EqualTo(20)); // Solo Ataque base
+        Assert.That(elfo.Mana, Is.EqualTo(20)); // Mana no cambia
     }
 
     [Test]
     public void TestRecibirAtaque()
     {
         elfo.Defender(40, "Bokoblin");
-        Assert.That(elfo.Vida, Is.EqualTo(160));
+        Assert.That(elfo.Vida, Is.EqualTo(160)); // Asegúrate de que Defender esté implementado
+    }
+
+    [Test]
+    public void TestAgregarHabilidad()
+    {
+        elfo.AgregarHabilidad(habilidad);
+        Assert.That(elfo.CantidadHabilidades, Is.EqualTo(1));
+        Assert.That(elfo.Hechizos[0].Nombre, Is.EqualTo("Agi"));
+    }
+
+    [Test]
+    public void TestValorAtaqueHechizos()
+    {
+        elfo.AgregarHabilidad(habilidad);
+        int valorHechizo = elfo.ValorAtaqueHechizos(habilidad);
+        Assert.That(valorHechizo, Is.EqualTo(60)); // 20 (Ataque base) + 40 (Habilidad)
+        Assert.That(elfo.Mana, Is.EqualTo(70)); // Mana después de usar hechizo
     }
 }
