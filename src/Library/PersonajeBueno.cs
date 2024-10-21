@@ -27,17 +27,14 @@ public class PersonajeBueno : IPersonajeBueno
     {
         Vida = vida;
     }
+    
 
-    public void VerificarSiEstaMuerto()
+    public bool RevisarMuerto()
     {
         if (Vida <= 0)
         {
             Vida0 = true;
         }
-    }
-
-    public bool RevisarMuerto()
-    {
         return Vida0;
     }
 

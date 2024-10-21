@@ -9,7 +9,7 @@ public interface IPersonajeBueno
     static int VP;
     public int VidaBase();
     public int VidaActual();
-    public void VerificarSiEstaMuerto();
+    
     public bool RevisarMuerto();
     public void RecibirVP(int VictoryPoints);
     public void CurarVida(int curacion);
