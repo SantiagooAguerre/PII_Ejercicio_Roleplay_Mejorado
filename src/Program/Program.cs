@@ -29,19 +29,11 @@ class Program
             
         mago.Estudio(20);
 
-        int ataqueElfo = elfo.AtacarConItems(espada);
-        ganondorf.Defender(ataqueElfo, elfo.Nombre);
-            
-        int ataqueEnano = enano.AtacarConItems(espadagrande);
-        skullkid.RecibirAtaqueFisico(ataqueEnano, enano.Nombre);
-        mago.Defender(ataqueEnano, enano.Nombre);
+        List<IPersonajeBueno> heroesList = new List<IPersonajeBueno> { elfo };
+        List<IPersonajeOscuro> enemigosList = new List<IPersonajeOscuro> { bokoblin, lizalfos, skullkid, ganondorf };
 
-        Habilidades habilidades = Habilidades.Ziodyne;
-            
-        int ataqueMago = mago.AtacarConHabilidades(habilidades: habilidades);
-            
-        elfo.Defender(ataqueMago, mago.Nombre);
-            
-        elfo.Curacion(5, mago);
+        // Instanciar y ejecutar el encuentro
+        EncuentroCombate encuentro = new EncuentroCombate(heroesList, enemigosList);
+        encuentro.DoEncounter();
     }
 }

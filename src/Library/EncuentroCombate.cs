@@ -2,7 +2,7 @@ namespace roleplay;
 
 public class EncuentroCombate:Encuentro
 {
-    public EncuentroCombate(List<PersonajeBueno> heroes, List<PersonajeOscuro> enemigos):base(heroes,enemigos)
+    public EncuentroCombate(List<IPersonajeBueno> heroes, List<IPersonajeOscuro> enemigos):base(heroes,enemigos)
     {
     }
 
@@ -54,9 +54,9 @@ public class EncuentroCombate:Encuentro
         int numHeroes = Heroes.Count(h => h.Vida > 0);
         int heroIndex = 0;
 
-        foreach (var enemigo in Enemigos.Where(e => e.Vida > 0))
+        foreach (PersonajeOscuro enemigo in Enemigos.Where(e => e.Vida > 0))
         {
-            var heroe = Heroes[heroIndex % numHeroes];
+            IPersonajeBueno heroe = Heroes[heroIndex % numHeroes];
             heroe.Defender(enemigo.Ataque, enemigo.Nombre); 
             heroIndex++;
         }
@@ -64,9 +64,9 @@ public class EncuentroCombate:Encuentro
 
     private void AtacanHeroes()
     {
-        foreach (var heroe in Heroes.Where(h => h.Vida > 0))
+        foreach (PersonajeBueno heroe in Heroes.Where(h => h.Vida > 0))
         {
-            foreach (var enemigo in Enemigos.Where(e => e.Vida > 0))
+            foreach (PersonajeOscuro enemigo in Enemigos.Where(e => e.Vida > 0))
             {
                 enemigo.Defender(heroe.Ataque, heroe.Nombre);
 

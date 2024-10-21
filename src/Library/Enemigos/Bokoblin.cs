@@ -20,6 +20,6 @@ public class Bokoblin : PersonajeOscuro
     {
         Console.WriteLine($"{Nombre} fue atacado mágicamente por {atacante} con {ataque} de ataque.");
         Vida -= ataque;
-        VerificarSiEstaMuerto();
+        RevisarMuerto();
     }
 }

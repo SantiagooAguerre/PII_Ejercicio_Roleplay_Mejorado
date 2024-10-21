@@ -14,7 +14,7 @@ public class Lizalfos : PersonajeOscuro
     {
         Console.WriteLine($"{Nombre} fue atacado físicamente por {atacante} con {ataque} de ataque.");
         Vida -= ataque;
-        VerificarSiEstaMuerto();
+        RevisarMuerto();
     }
 
     public void RecibirAtaqueMagico(int ataque, string atacante)
