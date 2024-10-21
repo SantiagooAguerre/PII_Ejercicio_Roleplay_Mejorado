@@ -11,6 +11,7 @@ public class Mago : Heroes, IUniversitario
     {
         Nombre = nombre;
         Vida = 100;
+        Vidabase = 100;
         Ataque = 30;
         Mana = 150;
         ManaInicial = 150;
@@ -26,7 +27,7 @@ public class Mago : Heroes, IUniversitario
         ItemMagico.Add(itemMagico);
     }
 
-    public int AtacarConHabilidades(Habilidades habilidades = null)
+    public int AtacarConHabilidades(Habilidades habilidades)
     {
         int valor = Ataque;
 
@@ -43,6 +44,14 @@ public class Mago : Heroes, IUniversitario
             }
         }
         return valor;
+    }
+    
+    public void MostrarHabilidades()
+    {
+        for (int i = 0; i < Habilidades.Count; i++)
+        {
+            Console.WriteLine($"{i + 1}. {Habilidades[i].Nombre}");
+        }
     }
 
     public void Estudio(int estudio)

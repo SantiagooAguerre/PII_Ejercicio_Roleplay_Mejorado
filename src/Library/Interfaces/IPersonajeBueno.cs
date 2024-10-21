@@ -1,14 +1,18 @@
 namespace roleplay;
 
-public interface IPersonaje
+public interface IPersonajeBueno
 {
     string Nombre { get; set; }
-    static int Vida;
+    int Vida { get; set; }
     static int Vidabase;
     static int Ataque;
     static int VP;
     public int VidaBase();
     public int VidaActual();
+    public void VerificarSiEstaMuerto();
+    public bool RevisarMuerto();
+    public void RecibirVP(int VictoryPoints);
+    public void CurarVida(int curacion);
     public List<IItemAtaque> ItemAtaque { get; set; }
     public List<IItemDefensa> ItemDefensa { get; set; }
     public void Defender(int ataque, string rival);

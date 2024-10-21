@@ -5,9 +5,14 @@ class Program
     static void Main(string[] args)
     {
         ISanador elfo = new Elfo("Link");
-        IPersonaje enano = new Enano("Darunia");
+        IPersonajeBueno enano = new Enano("Darunia");
         IUniversitario mago = new Mago("Zelda");
-            
+
+        Bokoblin bokoblin = new Bokoblin("Bokoblin");
+        Lizalfos lizalfos = new Lizalfos("Lizalfo");
+        SkullKid skullkid = new SkullKid("SkullKid");
+        IPersonajeOscuro ganondorf = new Ganondorf("Ganondorf", false);
+        
         IItemAtaque espada = Item.MasterSword;
         IItemAtaque espadagrande = Item.EspadaBiggoron;
         IItemDefensa escudo = Item.EscudoHyliano;
@@ -22,28 +27,21 @@ class Program
 
         mago.AgregarItemDefensa(tunica);
             
-        mago.AgregarHabilidad(Habilidades.Agi);
-        mago.AgregarHabilidad(Habilidades.Ziodyne);
-            
         mago.Estudio(20);
-            
-        Console.WriteLine("Ataques y habilidades:");
 
         int ataqueElfo = elfo.AtacarConItems(espada);
-        enano.Defender(ataqueElfo, elfo.Nombre);
+        ganondorf.Defender(ataqueElfo, elfo.Nombre);
             
         int ataqueEnano = enano.AtacarConItems(espadagrande);
+        skullkid.RecibirAtaqueFisico(ataqueEnano, enano.Nombre);
         mago.Defender(ataqueEnano, enano.Nombre);
 
         Habilidades habilidades = Habilidades.Ziodyne;
-        int ataqueMago = 0;
             
-        ataqueMago = mago.AtacarConHabilidades(habilidades: habilidades);
+        int ataqueMago = mago.AtacarConHabilidades(habilidades: habilidades);
             
         elfo.Defender(ataqueMago, mago.Nombre);
             
-        elfo.Curacion(30);
-            
-            
+        elfo.Curacion(5, mago);
     }
 }

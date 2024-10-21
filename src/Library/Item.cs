@@ -6,12 +6,12 @@ public class Item : IItemAtaque, IItemDefensa, IItemMagico
     public int Defensa { get; set; }
     public int Ataque { get; set; }
     
-    public int ObtenerAtaque()
+    public int RevisarElAtaque()
     {
         return Ataque;
     }
     
-    public int ObtenerDefensa()
+    public int RevisarLaDefensa()
     {
         return Defensa;
     }

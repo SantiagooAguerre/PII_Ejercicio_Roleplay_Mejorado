@@ -1,6 +1,6 @@
 namespace roleplay;
 
-public class Heroes : Personaje
+public class Heroes : PersonajeBueno
 {
     public void ImprimirVP()
     {

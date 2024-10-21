@@ -6,6 +6,7 @@ public class Enano : Heroes
     {
         Nombre = nombre;
         Vida = 200;
+        Vidabase = 200;
         Ataque = 20;
         Vidabase = 200;
     }

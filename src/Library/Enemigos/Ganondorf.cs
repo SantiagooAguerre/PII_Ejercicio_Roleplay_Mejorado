@@ -1,12 +1,22 @@
 namespace roleplay;
 
-public class Ganondorf : Enemigos
+public class Ganondorf : PersonajeOscuro
 {
-    public Ganondorf(string nombre)
+    private bool Forma_Final;
+    public Ganondorf(string nombre, bool formaFinal)
     {
         Nombre = nombre;
+        Vidabase = 200;
         Vida = 200;
         Ataque = 20;
-        Vidabase = 200;
+        Forma_Final = formaFinal;
+        VP = 20;
+        if (formaFinal)
+        {
+            Nombre += " -Forma Final-";
+            Vidabase += 30;
+            Vida += 30;
+            Ataque += 50;
+        }
     }
 }

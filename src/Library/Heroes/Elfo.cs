@@ -25,6 +25,8 @@ public class Elfo : Heroes, ISanador
         Vidabase = 200;
         Mana = 100;
         ManaInicial = 100;
+        
+        
     }
 
     public void AgregarHabilidad(Habilidades habilidades)
@@ -109,17 +111,17 @@ public class Elfo : Heroes, ISanador
         return valor;
     }
 
-    public void Curacion(int curar, IPersonaje personajequecurar)
+    public void Curacion(int curar, IPersonajeBueno personajequecurar)
     {
-        if (personajequecurar.VidaActual() + curar > personajequecurar.VidaBase() || curar > 20)
+        if ((personajequecurar.VidaActual() + curar) > personajequecurar.VidaBase() || curar > 20)
         {
-            Console.WriteLine(
-                $"{Nombre} no ha podido curarse");
+            Console.WriteLine($"{Nombre} intentó curar a {personajequecurar.Nombre}, pero no puede curar más de su vida base o mas de 20 puntos de vida por turno.");
         }
         else
         {
-            Vida += curar;
-            Console.WriteLine($"{Nombre} recuperó PS, su vida llegó hasta {Vida}");
+            personajequecurar.CurarVida(personajequecurar.VidaActual() + curar);
+            Console.WriteLine($"{Nombre} curó a {personajequecurar.Nombre} {curar} PS, su vida actual es {personajequecurar.VidaActual()}-{personajequecurar.VidaBase()}.");
         }
     }
+
 }

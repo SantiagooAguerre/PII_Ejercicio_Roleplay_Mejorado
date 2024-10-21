@@ -2,14 +2,14 @@ namespace roleplay;
 
 using System;
 
-public class Personaje : IPersonaje
+public class PersonajeOscuro : IPersonajeOscuro
 {
     public string Nombre { get; set; }
     public int Vida { get; set; }
     private bool Vida0 { get; set; }
     public int Ataque { get; set; }
     public int Vidabase { get; set; }
-    public int VP;
+    public int VP { get; set; }
     public List<IItemAtaque> ItemAtaque { get; set; } = new List<IItemAtaque>();
     public List<IItemDefensa> ItemDefensa { get; set; } = new List<IItemDefensa>();
 
@@ -36,17 +36,10 @@ public class Personaje : IPersonaje
         return Vida0;
     }
 
-    public void RecibirVP(int VictoryPoints)
-    {
-        this.VP += VictoryPoints;
-    }
-
     public int RevisarAtaque()
     {
         return Ataque;
     }
-    
-    
     
     public void AgregarItemAtaque(IItemAtaque itemAtaque)
     {
