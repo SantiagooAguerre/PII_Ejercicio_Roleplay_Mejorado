@@ -9,7 +9,7 @@ public interface IPersonajeOscuro
     int VP { get; set; }
     public int VidaBase();
     public int VidaActual();
-    public void VerificarSiEstaMuerto();
+    
     public bool RevisarMuerto();
     public List<IItemAtaque> ItemAtaque { get; set; }
     public List<IItemDefensa> ItemDefensa { get; set; }
