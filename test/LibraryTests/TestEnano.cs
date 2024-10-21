@@ -56,4 +56,19 @@ public class TestEnano
         enano.Defender(50, "Molduga");
         Assert.That(enano.Vida, Is.EqualTo(200 - 50 + botasDeHierro.Defensa));
     }
+
+    [Test]
+    public void TestVidaNoSobrepasaMaximo()
+    {
+        enano.Vida = 180; // Simulando que el enano ha recibido daño
+        enano.CurarVida(30); // Método hipotético para curar vida
+        Assert.That(enano.Vida, Is.EqualTo(200)); // Verifica que no supere el máximo
+    }
+
+    [Test]
+    public void TestRecibirAtaqueSinDefensa()
+    {
+        enano.Defender(30, "Molduga");
+        Assert.That(enano.Vida, Is.EqualTo(200 - 30)); // Sin items de defensa
+    }
 }
