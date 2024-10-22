@@ -12,7 +12,7 @@ public class Elfo : Heroes, ISanador
         get { return Habilidades.Count; }
     }
 
-    public List<Habilidades> Hechizos
+    public List<Habilidades> Conjuros
     {
         get { return Habilidades; }
     }

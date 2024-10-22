@@ -39,7 +39,7 @@ public class TestElfo
     [Test]
     public void TestAgregarItemMagico()
     {
-        elfo.AgregarItemMagico(infilitracion);
+        elfo.AgregarItemMagico(espada);
         Assert.That(elfo.ItemMagico.Count, Is.EqualTo(1));
     }
 
