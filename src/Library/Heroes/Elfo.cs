@@ -4,8 +4,8 @@ public class Elfo : Heroes, ISanador
 {
     public int Mana { get; set; }
     public int ManaInicial;
-    private List<Habilidades> Habilidades = new List<Habilidades>();
-    private List<IItemMagico> ItemMagico = new List<IItemMagico>();
+    public List<Habilidades> Habilidades = new List<Habilidades>();
+    public List<IItemMagico> ItemMagico = new List<IItemMagico>();
     
     public int CantidadHabilidades
     {

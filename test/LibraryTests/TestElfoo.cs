@@ -5,14 +5,14 @@ namespace roleplay;
 public class TestElfo
 {
     private Elfo elfo;
-    private IItemMagico infiltracion;
+    public IItemMagico infiltracion;
     private Habilidades habilidad;
 
     [SetUp]
     public void Setup()
     {
         elfo = new Elfo("Link");
-        infiltracion = Item.Infilitracion;
+        infiltracion = new Item(); // Suponiendo que ItemMagico implementa IItemMagico
         habilidad = new Habilidades { Nombre = "Agi", Ataque = 40, Costo = 30 }; // Asumiendo que Habilidades tiene estas propiedades
     }
 
@@ -39,7 +39,7 @@ public class TestElfo
     [Test]
     public void TestAgregarItemMagico()
     {
-        elfo.AgregarItemMagico(infilitracion);
+        elfo.AgregarItemMagico(infiltracion);
         Assert.That(elfo.ItemMagico.Count, Is.EqualTo(1));
     }
 

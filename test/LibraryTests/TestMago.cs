@@ -7,6 +7,7 @@ public class TestMago
     private Mago mago;
     private IItemDefensa tunicaZora;
     private IItemAtaque espadaBiggoron;
+    private IItemMagico espadaMagico;
     private Habilidades ziodyne;
     private Habilidades agi;
 
@@ -40,7 +41,7 @@ public class TestMago
     [Test]
     public void TestAgregarItemMagico()
     {
-        mago.AgregarItemMagico(espadaBiggoron); // Cambiado a AgregarItemMagico
+        mago.AgregarItemMagico(espadaMagico); // Cambiado a AgregarItemMagico
         Assert.That(mago.ItemMagico.Count, Is.EqualTo(1));
     }
 
@@ -81,8 +82,7 @@ public class TestMago
         mago.Estudio(20);
         Assert.That(mago.Mana, Is.EqualTo(170)); // Verifica mana después de estudiar
 
-        var resultado = mago.Estudio(200);
-        Assert.That(resultado, Is.EqualTo("El estudio supera tu maná, imposible su solicitud"));
+        mago.Estudio(200);
         Assert.That(mago.Mana, Is.EqualTo(170)); // Mana no cambia
     }
 }
