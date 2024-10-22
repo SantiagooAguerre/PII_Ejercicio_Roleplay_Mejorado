@@ -28,47 +28,43 @@ public class TestSkullKid
     [Test]
     public void TestRecibirAtaqueFisicoEsquivar()
     {
-        // Forzar el resultado de Random para asegurar que el ataque sea esquivado
         var originalRandom = typeof(Random).GetField("m_Seed", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-        originalRandom.SetValue(random, 1); // Establecer una semilla fija
+        originalRandom.SetValue(random, 1);
 
         var output = CaptureConsoleOutput(() => skullKid.RecibirAtaqueFisico(30, "Link"));
         Assert.That(output, Is.EqualTo("Skull Kid esquivó el ataque de Link.\n"));
-        Assert.That(skullKid.Vida, Is.EqualTo(50)); // La vida no debe cambiar
+        Assert.That(skullKid.Vida, Is.EqualTo(50));
     }
 
     [Test]
     public void TestRecibirAtaqueFisicoNoEsquivar()
     {
-        // Forzar el resultado de Random para asegurar que el ataque no sea esquivado
         var originalRandom = typeof(Random).GetField("m_Seed", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-        originalRandom.SetValue(random, 2); // Establecer otra semilla
+        originalRandom.SetValue(random, 2);
 
         skullKid.RecibirAtaqueFisico(30, "Link");
-        Assert.That(skullKid.Vida, Is.EqualTo(20)); // La vida debe disminuir
+        Assert.That(skullKid.Vida, Is.EqualTo(20));
     }
 
     [Test]
     public void TestRecibirAtaqueMagicoEsquivar()
     {
-        // Forzar el resultado de Random para asegurar que el ataque sea esquivado
         var originalRandom = typeof(Random).GetField("m_Seed", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-        originalRandom.SetValue(random, 1); // Establecer una semilla fija
+        originalRandom.SetValue(random, 1);
 
         var output = CaptureConsoleOutput(() => skullKid.RecibirAtaqueMagico(30, "Zelda"));
         Assert.That(output, Is.EqualTo("Skull Kid esquivó el ataque de Zelda.\n"));
-        Assert.That(skullKid.Vida, Is.EqualTo(50)); // La vida no debe cambiar
+        Assert.That(skullKid.Vida, Is.EqualTo(50));
     }
 
     [Test]
     public void TestRecibirAtaqueMagicoNoEsquivar()
     {
-        // Forzar el resultado de Random para asegurar que el ataque no sea esquivado
         var originalRandom = typeof(Random).GetField("m_Seed", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-        originalRandom.SetValue(random, 2); // Establecer otra semilla
+        originalRandom.SetValue(random, 2);
 
         skullKid.RecibirAtaqueMagico(30, "Zelda");
-        Assert.That(skullKid.Vida, Is.EqualTo(20)); // La vida debe disminuir
+        Assert.That(skullKid.Vida, Is.EqualTo(20));
     }
 
     private string CaptureConsoleOutput(Action action)

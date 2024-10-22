@@ -5,84 +5,88 @@ namespace roleplay;
 public class TestMago
 {
     private Mago mago;
-    private IItemDefensa tunicaZora;
-    private IItemAtaque espadaBiggoron;
-    private IItemMagico espadaMagico;
-    private Habilidades ziodyne;
-    private Habilidades agi;
+    private IItemMagico itemMagico;
+    private Habilidades habilidad;
 
     [SetUp]
     public void Setup()
     {
-        mago = new Mago("Zelda");
-        tunicaZora = Item.TunicaZora;
-        espadaBiggoron = Item.EspadaBiggoron;
-        ziodyne = new Habilidades { Nombre = "Ziodyne", Ataque = 50, Costo = 40 }; // Asumiendo propiedades de Habilidades
-        agi = new Habilidades { Nombre = "Agi", Ataque = 30, Costo = 20 }; // Asumiendo propiedades de Habilidades
+        mago = new Mago("HeroeDelTiempo");
+        itemMagico = new Item();
+        habilidad = new Habilidades { Nombre = "Agi", Ataque = 20, Costo = 30 };
     }
 
     [Test]
     public void TestInicializacionMago()
     {
-        Assert.That(mago.Nombre, Is.EqualTo("Zelda"));
+        Assert.That(mago.Nombre, Is.EqualTo("HeroeDelTiempo"));
         Assert.That(mago.Vida, Is.EqualTo(100));
-        Assert.That(mago.Mana, Is.EqualTo(150));
         Assert.That(mago.Ataque, Is.EqualTo(30));
+        Assert.That(mago.Mana, Is.EqualTo(150));
     }
 
     [Test]
     public void TestAgregarHabilidad()
     {
-        mago.AgregarHabilidad(ziodyne);
-        mago.AgregarHabilidad(agi);
-        Assert.That(mago.Habilidades.Count, Is.EqualTo(2));
+        mago.AgregarHabilidad(habilidad);
+        Assert.That(mago.Habilidades.Count, Is.EqualTo(1));
+        Assert.That(mago.Habilidades[0].Nombre, Is.EqualTo("Agi"));
     }
 
     [Test]
     public void TestAgregarItemMagico()
     {
-        mago.AgregarItemMagico(espadaMagico); // Cambiado a AgregarItemMagico
+        mago.AgregarItemMagico(itemMagico);
         Assert.That(mago.ItemMagico.Count, Is.EqualTo(1));
     }
 
     [Test]
-    public void TestAtacarConHabilidad()
+    public void TestAtacarConHabilidades()
     {
-        mago.AgregarHabilidad(agi);
-        int valorAtaque = mago.AtacarConHabilidades(agi);
-        Assert.That(valorAtaque, Is.EqualTo(30 + agi.Ataque));
-        Assert.That(mago.Mana, Is.EqualTo(130)); // Verifica el maná después de usar la habilidad
+        mago.AgregarHabilidad(habilidad);
+        int valorAtaque = mago.AtacarConHabilidades(habilidad);
+        Assert.That(valorAtaque, Is.EqualTo(50));
+        Assert.That(mago.Mana, Is.EqualTo(120));
     }
 
     [Test]
-    public void TestAtacarConHabilidadSinMana()
+    public void TestAtacarConHabilidadesSinMana()
     {
-        mago.Mana = 10; // Establecer mana bajo
-        int valorAtaque = mago.AtacarConHabilidades(agi);
-        Assert.That(valorAtaque, Is.EqualTo(30)); // Solo ataque base
-        Assert.That(mago.Mana, Is.EqualTo(10)); // Mana no cambia
+        habilidad.Costo = 200;
+        mago.AgregarHabilidad(habilidad);
+        int valorAtaque = mago.AtacarConHabilidades(habilidad);
+        Assert.That(valorAtaque, Is.EqualTo(30));
+        Assert.That(mago.Mana, Is.EqualTo(150));
+    }
+
+    [Test]
+    public void TestEstudioConManaSuficiente()
+    {
+        mago.Estudio(50);
+        Assert.That(mago.Mana, Is.EqualTo(200));
+    }
+
+    [Test]
+    public void TestEstudioConManaExcediendoManaInicial()
+    {
+        mago.Estudio(200);
+        Assert.That(mago.Mana, Is.EqualTo(150));
     }
 
     [Test]
     public void TestRecargaMana()
     {
-        mago.AtacarConHabilidades(ziodyne);
-        mago.AtacarConHabilidades(ziodyne);
-        var resultado = mago.RecargaMana(50);
-        Assert.That(resultado, Is.EqualTo("Aumentaste el mana en 50 puntos"));
-        Assert.That(mago.Mana, Is.EqualTo(160)); // Verifica el mana después de recargar
-
-        mago.RecargaMana(100); // Intentar cargar más de lo máximo
-        Assert.That(mago.Mana, Is.EqualTo(mago.ManaInicial)); // Mana no supera el máximo
+        var resultado = mago.RecargaMana(30);
+        Assert.That(resultado, Is.EqualTo("Aumentaste el mana en 30 puntos"));
+        Assert.That(mago.Mana, Is.EqualTo(180));
     }
 
     [Test]
-    public void TestEstudio()
+    public void TestRecargaManaAlMaximo()
     {
-        mago.Estudio(20);
-        Assert.That(mago.Mana, Is.EqualTo(170)); // Verifica mana después de estudiar
-
-        mago.Estudio(200);
-        Assert.That(mago.Mana, Is.EqualTo(170)); // Mana no cambia
+        mago.Mana = 120;
+        var resultado = mago.RecargaMana(50);
+        Assert.That(resultado, Is.EqualTo("El maná está al maximo"));
+        Assert.That(mago.Mana, Is.EqualTo(150));
     }
 }

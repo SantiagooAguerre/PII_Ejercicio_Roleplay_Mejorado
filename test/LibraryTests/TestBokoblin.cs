@@ -25,21 +25,21 @@ public class TestBokoblin
     {
         var output = CaptureConsoleOutput(() => Bokoblin.RecibirAtaqueFisico(30, "Link"));
         Assert.That(output, Is.EqualTo("Ganon es inmune a los ataques físicos. El ataque de Link no tuvo efecto.\n"));
-        Assert.That(Bokoblin.Vida, Is.EqualTo(200)); // La vida no debe cambiar
+        Assert.That(Bokoblin.Vida, Is.EqualTo(200));
     }
 
     [Test]
     public void TestRecibirAtaqueMagico()
     {
         Bokoblin.RecibirAtaqueMagico(50, "Zelda");
-        Assert.That(Bokoblin.Vida, Is.EqualTo(150)); // Vida debe disminuir
+        Assert.That(Bokoblin.Vida, Is.EqualTo(150));
     }
 
     [Test]
     public void TestRecibirAtaqueMagicoYVerificarMuerte()
     {
-        Bokoblin.RecibirAtaqueMagico(200, "Zelda"); // Ataque que debería matar al Bokoblin
-        Assert.That(Bokoblin.Vida, Is.EqualTo(-50)); // Verifica que la vida sea -50
+        Bokoblin.RecibirAtaqueMagico(200, "Zelda");
+        Assert.That(Bokoblin.Vida, Is.EqualTo(-50));
     }
 
     private string CaptureConsoleOutput(Action action)

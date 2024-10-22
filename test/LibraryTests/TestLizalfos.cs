@@ -25,14 +25,14 @@ public class TestLizalfos
     public void TestRecibirAtaqueFisico()
     {
         lizalfos.RecibirAtaqueFisico(30, "Link");
-        Assert.That(lizalfos.Vida, Is.EqualTo(170)); // Verifica que la vida disminuya correctamente
+        Assert.That(lizalfos.Vida, Is.EqualTo(170));
     }
 
     [Test]
     public void TestRecibirAtaqueFisicoYVerificarMuerte()
     {
-        lizalfos.RecibirAtaqueFisico(200, "Link"); // Ataque que debería matar al Lizalfos
-        Assert.That(lizalfos.Vida, Is.EqualTo(-30)); // Verifica que la vida sea -30
+        lizalfos.RecibirAtaqueFisico(200, "Link");
+        Assert.That(lizalfos.Vida, Is.EqualTo(-30));
     }
 
     [Test]
@@ -40,7 +40,7 @@ public class TestLizalfos
     {
         var output = CaptureConsoleOutput(() => lizalfos.RecibirAtaqueMagico(50, "Zelda"));
         Assert.That(output, Is.EqualTo("Zelda es inmune a los ataques magicos. El ataque de Zelda no tuvo efecto.\n"));
-        Assert.That(lizalfos.Vida, Is.EqualTo(200)); // La vida no debe cambiar
+        Assert.That(lizalfos.Vida, Is.EqualTo(200));
     }
 
     private string CaptureConsoleOutput(Action action)

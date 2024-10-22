@@ -26,8 +26,8 @@ public class TestGanondorf
     {
         var ganondorfFinal = new Ganondorf("Ganondorf", true);
         Assert.That(ganondorfFinal.Nombre, Is.EqualTo("Ganondorf -Forma Final-"));
-        Assert.That(ganondorfFinal.Vida, Is.EqualTo(230)); // Vida base + 30
-        Assert.That(ganondorfFinal.Vidabase, Is.EqualTo(230)); // Vida base + 30
-        Assert.That(ganondorfFinal.Ataque, Is.EqualTo(70)); // Ataque base + 50
+        Assert.That(ganondorfFinal.Vida, Is.EqualTo(230));
+        Assert.That(ganondorfFinal.Vidabase, Is.EqualTo(230));
+        Assert.That(ganondorfFinal.Ataque, Is.EqualTo(70));
     }
 }
