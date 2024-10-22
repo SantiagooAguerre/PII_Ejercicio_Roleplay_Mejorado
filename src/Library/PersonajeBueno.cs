@@ -76,17 +76,26 @@ public class PersonajeBueno : IPersonajeBueno
         {
             defensaTotal += item.Defensa;
         }
+
         int dañoRecibido = ataque - defensaTotal;
         if (dañoRecibido < 0)
         {
-            dañoRecibido = 0;
+            dañoRecibido = 0; // No se puede recibir daño negativo
         }
+
         Vida -= dañoRecibido;
     
+        if (Vida < 0)
+        {
+            Vida = 0; // Asegurar que la vida no baje de 0
+        }
+
         Console.WriteLine($"{Nombre} fue atacado por {rival}, su vida disminuyó hasta {Vida}");
-        if (Vida <= 0)
+    
+        if (Vida == 0)
         {
             Console.WriteLine($"{Nombre} ha muerto.");
         }
     }
+
 }

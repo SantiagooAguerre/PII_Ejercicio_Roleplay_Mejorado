@@ -29,7 +29,7 @@ class Program
             
         mago.Estudio(20);
 
-        List<IPersonajeBueno> heroesList = new List<IPersonajeBueno> { elfo };
+        List<IPersonajeBueno> heroesList = new List<IPersonajeBueno> { enano };
         List<IPersonajeOscuro> enemigosList = new List<IPersonajeOscuro> { bokoblin, lizalfos, skullkid, ganondorf };
 
         EncuentroCombate encuentro = new EncuentroCombate(heroesList, enemigosList);

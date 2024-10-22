@@ -52,15 +52,23 @@ public class EncuentroCombate:Encuentro
     private void AtacanEnemigos()
     {
         int numHeroes = Heroes.Count(h => h.Vida > 0);
-        int heroIndex = 0;
+        if (numHeroes == 0) return; // No atacar si no hay héroes vivos
 
+        int heroIndex = 0;
         foreach (PersonajeOscuro enemigo in Enemigos.Where(e => e.Vida > 0))
         {
             IPersonajeBueno heroe = Heroes[heroIndex % numHeroes];
-            heroe.Defender(enemigo.Ataque, enemigo.Nombre); 
+            heroe.Defender(enemigo.Ataque, enemigo.Nombre);
+
+            // Verificar si el héroe ha muerto tras ser atacado
+            if (heroe.Vida <= 0)
+            {
+                Console.WriteLine($"{heroe.Nombre} ha muerto en combate.");
+            }
             heroIndex++;
         }
     }
+
 
     private void AtacanHeroes()
     {
@@ -80,9 +88,11 @@ public class EncuentroCombate:Encuentro
                     if (heroe.VP >= 5)
                     {
                         heroe.CurarVida(25);
+                        Console.WriteLine($"{heroe.Nombre} se ha curado 25 puntos de vida.");
                     }
                 }
             }
         }
     }
+
 }
