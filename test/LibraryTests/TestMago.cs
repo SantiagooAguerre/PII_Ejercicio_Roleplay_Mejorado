@@ -90,21 +90,4 @@ public class TestMago
         Assert.That(mago.Mana, Is.EqualTo(150));
     }
 }
-//
-//
-//
 
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
